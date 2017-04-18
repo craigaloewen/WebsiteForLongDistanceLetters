@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
 		inputvalue = params[:value]
 
 		if inputvalue == "Craig"
-			redirect_to @love_letters
+			redirect_to love_letters_path
 		else
 			render :text => inputvalue
 		end
