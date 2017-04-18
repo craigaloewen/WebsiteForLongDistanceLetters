@@ -23,13 +23,21 @@ default: &default
 
 development:
   <<: *default
+<<<<<<< HEAD
   database: longDistanceLetters_development
+=======
+  database: test_db_app_development
+>>>>>>> 2a6ff49e845a908f17287f4cef55ce97623ea04b
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
+<<<<<<< HEAD
   #username: longDistanceLetters
+=======
+  #username: test_db_app
+>>>>>>> 2a6ff49e845a908f17287f4cef55ce97623ea04b
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +65,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+<<<<<<< HEAD
   database: longDistanceLetters_test
+=======
+  database: test_db_app_test
+>>>>>>> 2a6ff49e845a908f17287f4cef55ce97623ea04b
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +92,12 @@ test:
 #
 production:
   <<: *default
+<<<<<<< HEAD
   database: longDistanceLetters_production
   username: longDistanceLetters
   password: <%= ENV['LONGDISTANCELETTERS_DATABASE_PASSWORD'] %>
+=======
+  database: test_db_app_production
+  username: test_db_app
+  password: <%= ENV['TEST_DB_APP_DATABASE_PASSWORD'] %>
+>>>>>>> 2a6ff49e845a908f17287f4cef55ce97623ea04b
