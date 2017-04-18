@@ -10,8 +10,12 @@ class WelcomeController < ApplicationController
 	def startHomeScreen
 		inputvalue = params[:value]
 
-		render :text => inputvalue
-		
+		if inputvalue == "Craig"
+			redirect_to @love_letters
+		else
+			render :text => inputvalue
+		end
+
 	end
 
 
