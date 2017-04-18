@@ -1,11 +1,11 @@
 class LoveLettersController < ApplicationController
 	
 	def index
-		@articles = Article.all
+		@love_letter = LoveLetter.all
 	end
 
 	def show
-		@article = Article.find(params[:id])
+		@love_letter = LoveLetter.find(params[:id])
 	end
 
 
