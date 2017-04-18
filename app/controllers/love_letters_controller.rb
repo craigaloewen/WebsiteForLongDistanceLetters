@@ -3,6 +3,6 @@ class LoveLettersController < ApplicationController
 	end
 
 	def create
-		render plain: params[:article].inspect
+		render plain: params[:love_letter].inspect
 	end
 end
