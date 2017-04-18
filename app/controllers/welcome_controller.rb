@@ -1,13 +1,18 @@
 class WelcomeController < ApplicationController
-  def index
-  	
-  	inputvalue = params[:value]
-
-  	render :text => inputvalue
+	def index
 
 
 
-  end
+
+
+	end
+
+	def startHomeScreen
+		inputvalue = params[:value]
+
+		render :text => inputvalue
+		
+	end
 
 
 end
