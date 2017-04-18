@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'letter_viewer/index'
+
+  get 'letter_viewer/letterview'
+
   resources :love_letters
 
 
