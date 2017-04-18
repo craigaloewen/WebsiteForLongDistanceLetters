@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :articles
+  resources :love_letters
  
   root 'welcome#index'
 end
