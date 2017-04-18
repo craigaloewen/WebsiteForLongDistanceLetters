@@ -2,6 +2,13 @@
 <p>Find me in app/views/welcome/index.html.erb </p>
 
 
+<%= form_tag root_path do %>
+  <label for="value">Enter Value:</label>
+  <%= text_field_tag :value %>
+ <%= submit_tag "Submit" %>
+<% end %>
+
+
 <%= link_to 'New article', new_love_letter_path %>
 
 <%= link_to 'Love Letters', controller: 'love_letters' %>
