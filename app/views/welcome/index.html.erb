@@ -1,5 +1,12 @@
 <h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<p>Find me in app/views/welcome/index.html.erb - <%= session[:viewNumber] %></p>
+
+
+<%= form_tag welcome_input_path do %>
+  <%= label_tag(:inputname, "What's your name:") %>
+  <%= text_field_tag(:inputname) %>
+  <%= submit_tag("Search") %>
+<% end %>
 
 
 <%= link_to 'New article', new_love_letter_path %>
