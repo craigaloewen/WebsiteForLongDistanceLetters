@@ -1,7 +1,10 @@
 class WelcomeController < ApplicationController
   def index
   	
-  	session[:value] = 1
+  	if !(session[:value])
+  		session[:value] = 1
+  	else 
+  		session[:value] = 5
 
   	render :text => session[:value]
 
