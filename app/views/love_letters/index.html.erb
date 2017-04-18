@@ -1,0 +1,17 @@
+
+<h1>Listing Letters</h1>
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @articles.each do |love_letter| %>
+    <tr>
+      <td><%= love_letter.title %></td>
+      <td><%= love_letter.text %></td>
+      <td><%= link_to 'Show', love_letter_path(love_letter) %></td>
+    </tr>
+  <% end %>
+</table>
