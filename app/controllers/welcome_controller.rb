@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 		if inputvalue == "Craig"
 			redirect_to love_letters_path
 		else
-			render :text => inputvalue
+			redirect_to letter_viewer_index_path
 		end
 
 	end
