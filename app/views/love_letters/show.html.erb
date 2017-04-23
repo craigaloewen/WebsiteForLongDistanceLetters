@@ -1,10 +1,12 @@
 
-<p>
-  <strong>Title:</strong>
-  <%= @love_letter.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @love_letter.text %>
-</p>
+<% if @canView %>
+
+<%= render 'showLetter' %>
+
+<% else %>
+
+<%= render 'noAccess' %>
+
+<% end %>
+
+<%= link_to 'Back', root_path %>

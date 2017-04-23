@@ -1,5 +1,26 @@
-<%= form_tag input_name_path do %>
-  <label for="value">What's your Name:</label>
-  <%= text_field_tag :value %>
- <%= submit_tag "Submit" %>
-<% end %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<%= link_to 'Show Letters', love_letters_path %><br/>
+
+<%= link_to 'Show Time Holders', unlock_time_holders_path %><br/>
+
+
+
+<div class="container">
+	
+	<% @love_letter.each_with_index do |love_letter, index| %>
+		<% if (index % 3 == 0) %>
+			<div class="row">
+		<% end %>
+		<div class="col">
+			<i class="fa fa-envelope fa-5x" style="color:black"></i> <br/>
+			<%= love_letter.title %> <br/>
+			Created: <%= love_letter.created_at.strftime("%d %b. %Y") %><br/>
+			<%= link_to 'Open Letter', love_letter_path(love_letter) %>
+		</div>
+		<% if (index % 3 == 2 || index == (@love_letter_amount-1))  %>
+			</div>
+		<% end %>
+	<% end %>
+
+</div>

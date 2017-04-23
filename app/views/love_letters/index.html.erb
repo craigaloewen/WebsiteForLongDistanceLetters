@@ -1,17 +1,34 @@
 
 <h1>Listing Letters</h1>
  
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr>
+
+<%= link_to 'New Letter', new_love_letter_path %><br/>
+
+<div class="container">
+<div class="row">
+<div class="col">Title</div>
+<div class="col">Text</div>
+<div class="col">Date</div>
+<div class="col">isArchived</div>
+<div class="col">Colour</div>
+<div class="col">Edit</div>
+<div class="col">Destroy</div>
+</div>
+
  
   <% @love_letter.each do |love_letter| %>
-    <tr>
-      <td><%= love_letter.title %></td>
-      <td><%= love_letter.text %></td>
-      <td><%= link_to 'Show', love_letter_path(love_letter) %></td>
-    </tr>
+  	<div class="row">
+      <div class="col"><%= love_letter.title %></div>
+      <div class="col"><%= love_letter.text %></div>
+      <div class="col"><%= love_letter.created_at %></div>
+      <div class="col"><%= love_letter.isArchived %></div>
+      <div class="col"><%= love_letter.colour %></div>
+      <div class="col"><%= link_to 'Edit', edit_love_letter_path(love_letter) %></div>
+      <div class="col"><%= link_to 'Destroy', love_letter_path(love_letter),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></div>
+              </div>
   <% end %>
-</table>
+</div>
+<br/>
+<%= link_to 'Home Page', root_path %>

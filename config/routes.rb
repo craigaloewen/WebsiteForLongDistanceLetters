@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
-  
-  get 'letter_viewer/index'
 
-  get 'letter_viewer/letterview'
+  get '/love_letters/no_access', to: 'love_letters#no_access'
 
   resources :love_letters
+  resources :unlock_time_holders
 
-
-  match "/inputname" => "welcome#startHomeScreen", :via => :post, :as => :input_name
   root 'welcome#index'
 end

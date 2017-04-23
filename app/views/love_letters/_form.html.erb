@@ -1,0 +1,37 @@
+<%= form_for @love_letter do |f|  %>
+
+  <% if @love_letter.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@love_letter.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @love_letter.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+
+   <p>
+    <%= f.label :colour %><br>
+    <%= f.select :colour, [['Red','red'],['Blue','blue']] %> 
+  </p>
+
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

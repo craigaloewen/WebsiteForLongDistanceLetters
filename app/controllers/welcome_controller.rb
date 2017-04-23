@@ -1,22 +1,10 @@
 class WelcomeController < ApplicationController
+
+
+
 	def index
-
-
-
-
-
+		@love_letter = LoveLetter.all
+		@love_letter_amount = @love_letter.count
 	end
-
-	def startHomeScreen
-		inputvalue = params[:value]
-
-		if inputvalue == "Craig"
-			redirect_to love_letters_path
-		else
-			redirect_to letter_viewer_index_path
-		end
-
-	end
-
 
 end
