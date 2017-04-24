@@ -1,0 +1,2 @@
+class LetterLink < ApplicationRecord
+end

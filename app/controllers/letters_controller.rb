@@ -1,17 +1,15 @@
-class LoveLettersController < ApplicationController
+class LettersController < ApplicationController
 
 
 	http_basic_authenticate_with name: "craig", password: "letters", except: [:show]
 
-	def no_access
-
-	end
-
 	def index
-		@love_letter = LoveLetter.all
+		@letter = Letter.all
 	end
 
 	def show
+
+		@letter = Letter.find(params[:id])
 
 		@unlock_time_holder = UnlockTimeHolder.all
 
@@ -30,6 +28,8 @@ class LoveLettersController < ApplicationController
 			@newUnlockTime = Time.now + 10.seconds #Should be Unlock Time
 			@mainUnlockTimeHolder.update(unlockTime: @newUnlockTime)
 			@canView = true
+			@letter.isArchived = true
+			@letter.save
 		else
 			@canView = false
 		end
@@ -37,47 +37,54 @@ class LoveLettersController < ApplicationController
 		
 
 
-		@love_letter = LoveLetter.find(params[:id])
+		
 	end
 
 
 	def new
-		@love_letter = LoveLetter.new
+		@letter = Letter.new
 	end
 
 	def edit
-		@love_letter = LoveLetter.find(params[:id])
+		@letter = Letter.find(params[:id])
 	end
 
 	
 	def create
-		@love_letter = LoveLetter.new(love_letter_params)
-		@love_letter.isArchived = false
+		@letter = Letter.new(letter_params)
+		@letter.isArchived = false
 
-		@love_letter.save
-		redirect_to love_letters_path
+		@letter.save
+		redirect_to letters_path
 	end
 
 	def update
-		@love_letter = LoveLetter.find(params[:id])
+		@letter = Letter.find(params[:id])
 
-		if @love_letter.update(love_letter_params)
-			redirect_to love_letters_path
+		if @letter.update(letter_params)
+			redirect_to letters_path
 		else
 			render 'edit'
 		end
 	end
 
+	def unarchive
+		@letter = Letter.find(params[:id])
+		@letter.isArchived = false
+		@letter.save
+		redirect_to letters_path
+	end
+
 
 	def destroy
-		@love_letter = LoveLetter.find(params[:id])
-		@love_letter.destroy
+		@letter = Letter.find(params[:id])
+		@letter.destroy
 
-		redirect_to love_letters_path
+		redirect_to letters_path
 	end
 
 	private
-	def love_letter_params
-		params.require(:love_letter).permit(:title, :text, :colour)
+	def letter_params
+		params.require(:letter).permit(:title, :text, :colour)
 	end
 end

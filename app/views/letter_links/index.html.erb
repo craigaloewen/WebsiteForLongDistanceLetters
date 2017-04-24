@@ -1,0 +1,31 @@
+
+<h1>Listing Letters</h1>
+ 
+
+<%= link_to 'New Link', new_letter_link_path %><br/>
+
+
+<div class="container">
+<div class="row">
+<div class="col">Link</div>
+<div class="col">Number of Letters Left</div>
+<div class="col">Date</div>
+<div class="col">Edit</div>
+<div class="col">Destroy</div>
+</div>
+
+ 
+  <% @letter_link.each do |letter_link| %>
+    <div class="row">
+      <div class="col"><%= request.base_url + '/letter_links/' +letter_link.token %></div>
+      <div class="col"><%= letter_link.numLetters %></div>
+      <div class="col"><%= letter_link.created_at %></div>
+      <div class="col"><%= link_to 'Edit', edit_letter_link_path(letter_link) %></div>
+      <div class="col"><%= link_to 'Destroy', letter_link_path(letter_link),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></div>
+              </div>
+  <% end %>
+</div>
+<br/>
+<%= link_to 'Home Page', root_path %>

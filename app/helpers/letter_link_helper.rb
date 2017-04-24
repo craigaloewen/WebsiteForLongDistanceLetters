@@ -1,0 +1,2 @@
+module LetterLinkHelper
+end

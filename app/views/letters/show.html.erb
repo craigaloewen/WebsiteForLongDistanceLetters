@@ -1,0 +1,12 @@
+
+<% if @canView %>
+
+<%= render 'showLetter' %>
+
+<% else %>
+
+<%= render 'noAccess' %>
+
+<% end %>
+
+<%= link_to 'Back', root_path %>

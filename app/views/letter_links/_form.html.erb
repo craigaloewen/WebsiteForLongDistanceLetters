@@ -1,0 +1,12 @@
+<%= form_for @letter_link do |f|  %>
+
+ 
+  <p>
+    Number of Letters:<br>
+    <%= f.number_field :numLetters %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

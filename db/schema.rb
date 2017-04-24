@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423210229) do
+ActiveRecord::Schema.define(version: 20170424004136) do
 
-  create_table "love_letters", force: :cascade do |t|
-    t.string   "title"
-    t.text     "text"
+  create_table "letter_links", force: :cascade do |t|
+    t.integer  "numLetters"
+    t.string   "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "letters", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
     t.boolean  "isArchived"
     t.string   "colour"
+    t.string   "owner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "unlock_time_holders", force: :cascade do |t|
