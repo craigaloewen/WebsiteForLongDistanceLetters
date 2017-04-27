@@ -1,12 +1,12 @@
-<p>
-  <strong>Title:</strong>
-  <%= @letter.title %>
-</p>
+<div class="container" style="z-index: 5; padding-top: 30px;">
+<div class="letter-display-paper">
+
+  <h1 style="text-align: center;"><%= @letter.title %></h1>
  
 <p>
-  <strong>Text:</strong>
-  <%= @letter.text %>
+  <%= simple_format(@letter.text) %>
+  <br/>
+  From: <%= @letter.from %>
 </p>
-<br/>
-Can View: <%= @canView %> <br/>
-Unlock Time: <%= @unlockTime %>
+</div>
+</div>

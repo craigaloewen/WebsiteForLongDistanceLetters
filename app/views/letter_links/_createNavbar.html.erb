@@ -1,0 +1,21 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+<div class="container">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="<%= request.base_url + '/letter_links/' + @letter_link.token %>">Letters For Eleanor</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item <% if @page == "home" %>active<% end %>">
+        <a class="nav-link" href="<%= request.base_url + '/letter_links/' + @letter_link.token %>">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item <% if @page == "create_letter" %>active<% end %>">
+        <a class="nav-link<% if @letter_link.numLetters < 1 %> disabled<% end %>" href="<% if @letter_link.numLetters < 1 %>#<% else %><%= new_link_letter_path(@letter_link.token) %><% end %>">Create Letter</a>
+      </li>
+      <li class="nav-item <% if @page == "sent_letters" %>active<% end %>" >
+        <a class="nav-link" href="<%= sent_letters_path(@letter_link.token) %>">View Letters</a>
+      </li>
+    </ul>
+  </div>
+  </div>
+</nav>

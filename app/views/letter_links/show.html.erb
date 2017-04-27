@@ -1,6 +1,54 @@
-<h1>Showing Letter Link</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-Number of letters left: <%= @letter_link.numLetters %> <br/>
+<% @page = "home" %>
+<%= render 'createNavbar' %>
+
+<div class="jumbotron">
+	<div class="container">
+		<div class = "row"> 
+		<h1 class="display-3">Letters For Eleanor</h1> 
+		</div>
+		<div class="row">
+		<div class="col col-md-9">
+		<h3>What this is:</h3>
+		<p>This is a gift created by me (Craig) for when I leave to Seattle. The general idea is to have a jar filled with letters with personal messages written to her. She would only be able to open one letter a day. I wanted to add in some letters from her friends, and so I built this website to help do it! She will have a portion of the site where she can view all the letters that everyone writes. Thanks for helping me surprise Eleanor!<br/>
+
+		 </p>
+		</div>
+		<div class="col col-md-3">
+		<img src="/images/LetterJar.png" class="jumbotronImage"></img>
+		</div>
+		</div>
+	</div> 
+</div>
 
 
-<%= link_to 'Back', root_path %>
+
+
+
+<div class="container" style="padding-bottom: 40px">
+	<div class="row"> 
+	<div class="col">
+	<h3> What do I even write? </h3> 
+	The letters can be as long or as short as you like. Some ideas that I've seen are including fond memories, inside jokes, or just an uplifting messsage. <br/><br/>
+	An example could be:<br/>
+	Title: For when you need a laugh<br/>
+	Message: I always know when you find something <i>really</i> funny if you snort when you're laughing
+
+	</div>
+	<div class="col">
+	<h3>This link has <b><%= @letter_link.numLetters %></b> letters left</h3><br/>
+	<% if @letter_link.numLetters > 0 %> 
+	<button type="button" class="btn btn-primary" onclick="window.location='<%= new_link_letter_path(@letter_link.token) %>'">Create Letter</button>
+	<% else %>
+	Thanks for writing all of the letters!
+	<% end %>
+	<br/>
+	</div>
+	<div class="col">
+	<h3> See the letters created by this link </h3> <br/>
+	<button type="button" class="btn btn-primary" onclick="window.location='<%= sent_letters_path(@letter_link.token) %>'">View Letters</button>
+	</div>
+	</div>
+	
+</div>

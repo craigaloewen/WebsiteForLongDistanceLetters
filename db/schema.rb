@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 20170424004136) do
     t.text     "text"
     t.boolean  "isArchived"
     t.string   "colour"
-    t.string   "owner"
+    t.string   "from"
+    t.string   "link_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

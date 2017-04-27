@@ -1,37 +1,46 @@
 
 <h1>Listing Letters</h1>
  
+ <%= link_to 'Home Page', root_path %><br/>
 <%= link_to 'Letter Links', letter_links_path %><br/>
+<%= link_to 'Unlock Time Holders', unlock_time_holders_path %><br/>
 <%= link_to 'New Letter', new_letter_path %><br/>
 
 
+
 <div class="container">
-<div class="row">
-<div class="col">Title</div>
-<div class="col">Text</div>
-<div class="col">Date</div>
+<div class="row black-border">
+<div class="col-1">From</div>
+<div class="col-2">Title</div>
+<div class="col-8">Text</div>
+<div class="col-1">Date</div>
+</div><div class="row black-border">
 <div class="col">isArchived</div>
 <div class="col">Colour</div>
+<div class="col">Token</div>
 <div class="col">Edit</div>
 <div class="col">Unarchive</div>
 <div class="col">Destroy</div>
 </div>
+<br/>
 
  
   <% @letter.each do |letter| %>
-  	<div class="row">
-      <div class="col"><%= letter.title %></div>
-      <div class="col"><%= letter.text %></div>
-      <div class="col"><%= letter.created_at %></div>
+  	<div class="row black-border">
+      <div class="col-1"><%= letter.from %></div>
+      <div class="col-2"><%= letter.title %></div>
+      <div class="col-8"><%= simple_format(letter.text) %></div>
+      <div class="col-1"><%= letter.created_at %></div>
+      </div><div class="row black-border">
       <div class="col"><%= letter.isArchived %></div>
       <div class="col"><%= letter.colour %></div>
+      <div class="col"><%= letter.link_token %></div>
       <div class="col"><%= link_to 'Edit', edit_letter_path(letter) %></div>
-      <div class="col"><%= link_to 'Unarchive', unarchive_letter_path(letter) %></div>
+      <div class="col"><% if letter.isArchived %><%= link_to 'Unarchive', unarchive_letter_path(letter) %><% else %><%= link_to 'Archive', archive_letter_path(letter) %><% end %></div>
       <div class="col"><%= link_to 'Destroy', letter_path(letter),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></div>
-              </div>
+              </div> <br/>
   <% end %>
 </div>
 <br/>
-<%= link_to 'Home Page', root_path %>

@@ -1,26 +1,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<%= link_to 'Show Letters', letters_path %><br/>
-
-<%= link_to 'Show Time Holders', unlock_time_holders_path %><br/>
-
+<% @page = "home" %>
+<%= render 'createNavbar' %>
 
 
-<div class="container">
-	
-	<% @letter.each_with_index do |letter, index| %>
-		<% if (index % 3 == 0) %>
-			<div class="row">
-		<% end %>
-		<div class="col">
-			<i class="fa fa-envelope fa-5x" style="color:<%= letter.colour %>"></i> <br/>
-			<%= letter.title %> <br/>
-			Created: <%= letter.created_at.strftime("%d %b. %Y") %><br/>
-			<%= link_to 'Open Letter', letter_path(letter) %>
-		</div>
-		<% if (index % 3 == 2 || index == (@letter_amount-1))  %>
-			</div>
-		<% end %>
-	<% end %>
+<div class="jumbotron">
+  <div class="container">
+    <div class = "row"> 
+    <h1 class="display-3">Letters For Eleanor</h1> 
+    </div>
+    <div class="row">
+    <div class="col col-md-9">
+    <h3>What this is:</h3>
+    <p>This is my present from me to you for when I leave to Seattle! You've already received your paper version of this gift, and this is the virtual one! I've written lots of letters and gathered them from your friends and they're all assorted below. Just click on any one of them to read them. 
+    <br/><br/>You can look at one letter every 12 hours. You can currently look at: <b><%= @numberOfLettersAvailable %></b> letters! Your next letter unlocks in: <b><%= @nextUnlockTimeHours %>h:<%= @nextUnlockTimeMinutes %>m:<%= @nextUnlockTimeSeconds %>s</b><br/>
+     </p>
+    </div>
+    <div class="col col-md-3">
+    <img src="/images/LetterJar.png" class="jumbotronImage"></img>
+    </div>
+    </div>
+  </div> 
+</div>
+
+  <%= render 'listAllLetters' %>
 
 </div>

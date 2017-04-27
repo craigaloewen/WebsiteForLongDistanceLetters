@@ -5,7 +5,8 @@ class CreateLetters < ActiveRecord::Migration[5.0]
       t.text :text
       t.boolean :isArchived
       t.string :colour
-      t.string :owner
+      t.string :from
+      t.string :link_token
       t.timestamps
     end
   end

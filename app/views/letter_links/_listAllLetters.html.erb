@@ -1,0 +1,18 @@
+<div class="container">
+	<% @letter.each_with_index do |letter, index| %>
+		<% if (index % 3 == 0) %>
+			<div class="row">
+		<% end %>
+		<div class="col col-md-4 ">
+		<div class="pull-down">
+		<p class="letter-title-text"><%= letter.title %></p>
+			<div class="envelope-<%= letter.colour %>">
+			<div class="paper"></div>
+			</div>
+			<p class="letter-date-text"><%= letter.created_at.strftime("%d %b. %Y") %></p>
+		</div>
+		</div>
+		<% if (index % 3 == 2 || index == (@letter.count-1))  %>
+			</div>
+		<% end %>
+	<% end %>

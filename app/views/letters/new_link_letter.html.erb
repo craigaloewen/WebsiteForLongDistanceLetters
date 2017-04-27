@@ -1,0 +1,88 @@
+<% @page = "create_letter" %>
+<%= render '/letter_links/createNavbar' %>
+
+
+<div class="jumbotron">
+  <div class="container">
+
+  <h1>New Letter</h1>
+    <%= form_for @letter, url: {action: "create_link_letter"} do |f|  %>
+
+  <% if @letter.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@letter.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @letter.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :from %><br>
+    <%= f.text_field :from, :size => 100 %>
+  </p>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title, :size => 100 %>
+  </p>
+
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text, :size => "102x10" %>
+  </p>
+
+   <p>
+    <%= f.label :colour %><br>
+    <%= f.select :colour, [['Red','red'],['Blue','blue'],['Black','black'],['Pink','pink'],['Yellow','yellow']], :onchange => 'jsFunction()' %> 
+  </p>
+
+  <p style="text-align: center;">How the letters will be displayed:</p>
+  <div class="container-fluid">
+  <div class="row">
+      <div class="col">
+      <div class="envelope-red">
+      <div class="paper"></div></div>
+      </div>
+      <div class="col">
+      <div class="envelope-blue">
+      <div class="paper"></div></div>
+      </div>
+      <div class="col">
+      <div class="envelope-black">
+      <div class="paper"></div></div>
+      </div>
+      <div class="col">
+      <div class="envelope-pink">
+      <div class="paper"></div></div>
+      </div>
+      <div class="col">
+      <div class="envelope-yellow">
+      <div class="paper"></div></div>
+      </div>
+      </div>
+      </div>
+  <br/>
+  <p>
+    <%= f.submit %>
+  </p>
+  
+<% end %>
+
+<%= link_to 'Back to Home', letter_link_path(@letter_link.token) %>
+  </div> 
+</div>
+
+
+
+
+
+
+
+
+

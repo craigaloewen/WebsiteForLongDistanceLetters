@@ -1,10 +1,46 @@
 class WelcomeController < ApplicationController
 
 
+	http_basic_authenticate_with name: "eleanor", password: "present"
 
 	def index
+		unlockTimeHolder = UnlockTimeHolder.first
+
+		if unlockTimeHolder.nil?
+			unlockTimeHolder = UnlockTimeHolder.new(unlockTime: Time.now)
+			unlockTimeHolder.save
+		end
+
+		unlockTime = unlockTimeHolder.unlockTime
+		timeDifference = ((Time.now - unlockTime))
+
+		if timeDifference < 0
+			@numberOfLettersAvailable = 0
+			unlockTimeDifferenceValue = -timeDifference
+		else 
+			@numberOfLettersAvailable = (timeDifference/43200).ceil
+			unlockTimeDifferenceValue = 43200-(timeDifference % 43200)
+		end
+
+		@nextUnlockTimeSeconds = (unlockTimeDifferenceValue).floor % 60
+		@nextUnlockTimeMinutes = ((unlockTimeDifferenceValue)/60).floor % 60
+		@nextUnlockTimeHours = ((unlockTimeDifferenceValue)/3600).floor
+
+		@canView
+
+		if Time.now > unlockTime 
+			@canView = true
+		else 
+			@canView = false
+		end
+
+
+
 		@letter = Letter.where(isArchived: false)
-		@letter_amount = @letter.count
+	end
+
+	def show_archived
+		@letter = Letter.where(isArchived: true)
 	end
 
 end

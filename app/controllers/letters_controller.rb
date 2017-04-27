@@ -1,7 +1,8 @@
 class LettersController < ApplicationController
 
 
-	http_basic_authenticate_with name: "craig", password: "letters", except: [:show]
+	http_basic_authenticate_with name: "craig", password: "letters", except: [:show, :show_archived, :new_link_letter, :create_link_letter]
+	http_basic_authenticate_with name: "eleanor", password: "present", only: [:show, :show_archived]
 
 	def index
 		@letter = Letter.all
@@ -11,21 +12,17 @@ class LettersController < ApplicationController
 
 		@letter = Letter.find(params[:id])
 
-		@unlock_time_holder = UnlockTimeHolder.all
+		@mainUnlockTimeHolder = UnlockTimeHolder.first
 
-		if @unlock_time_holder.count < 1
-			@unlock_time_holder_new = UnlockTimeHolder.new(unlockTime: Time.now)
-			@unlock_time_holder_new.save
+		if @mainUnlockTimeHolder.nil?
+			@mainUnlockTimeHolder = UnlockTimeHolder.new(unlockTime: Time.now)
+			@mainUnlockTimeHolder.save
 		end
 
-		@mainUnlockTimeHolderArray = UnlockTimeHolder.limit(1)
-		@mainUnlockTimeHolder = @mainUnlockTimeHolderArray[0]
 		@unlockTime = @mainUnlockTimeHolder.unlockTime
 
-		@canView
-
 		if Time.now > @unlockTime
-			@newUnlockTime = Time.now + 10.seconds #Should be Unlock Time
+			@newUnlockTime = @unlockTime + 12.hours #Should be Unlock Time
 			@mainUnlockTimeHolder.update(unlockTime: @newUnlockTime)
 			@canView = true
 			@letter.isArchived = true
@@ -34,10 +31,10 @@ class LettersController < ApplicationController
 			@canView = false
 		end
 
-		
+	end
 
-
-		
+	def show_archived
+		@letter = Letter.find(params[:id])
 	end
 
 
@@ -53,9 +50,41 @@ class LettersController < ApplicationController
 	def create
 		@letter = Letter.new(letter_params)
 		@letter.isArchived = false
+		@letter.link_token = "admin-created"
 
 		@letter.save
 		redirect_to letters_path
+	end
+
+	def new_link_letter
+		@letter_link = LetterLink.where("token = ?", params[:link_token]).take
+
+		if @letter_link.nil?
+			redirect_to error_letter_link_path(params[:link_token])
+		end
+
+		@letter = Letter.new
+	end
+
+	def create_link_letter
+		@letter_link = LetterLink.where("token = ?", params[:link_token]).take
+
+		if @letter_link.nil?
+			redirect_to error_letter_link_path(params[:link_token])
+		end
+
+
+		@letter_link.numLetters = @letter_link.numLetters - 1
+		@letter_link.save
+
+		@letter = Letter.new(letter_params)
+		@letter.isArchived = false
+		@letter.link_token = @letter_link.token
+		@letter.save
+
+		
+		redirect_to letter_link_path(@letter_link.token)
+
 	end
 
 	def update
@@ -75,6 +104,13 @@ class LettersController < ApplicationController
 		redirect_to letters_path
 	end
 
+	def archive
+		@letter = Letter.find(params[:id])
+		@letter.isArchived = true
+		@letter.save
+		redirect_to letters_path
+	end
+
 
 	def destroy
 		@letter = Letter.find(params[:id])
@@ -85,6 +121,6 @@ class LettersController < ApplicationController
 
 	private
 	def letter_params
-		params.require(:letter).permit(:title, :text, :colour)
+		params.require(:letter).permit(:from, :title, :text, :colour)
 	end
 end
