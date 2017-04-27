@@ -1,4 +1,4 @@
 class Letter < ApplicationRecord
 	validates :title, presence: true,
-	length: { minimum: 1 }
+                    length: { minimum: 5 }
 end
