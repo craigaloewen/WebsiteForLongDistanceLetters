@@ -18,8 +18,8 @@ class WelcomeController < ApplicationController
 			@numberOfLettersAvailable = 0
 			unlockTimeDifferenceValue = -timeDifference
 		else 
-			@numberOfLettersAvailable = (timeDifference/43200).ceil
-			unlockTimeDifferenceValue = 43200-(timeDifference % 43200)
+			@numberOfLettersAvailable = (timeDifference/172800).ceil
+			unlockTimeDifferenceValue = 172800-(timeDifference % 172800)
 		end
 
 		@nextUnlockTimeSeconds = (unlockTimeDifferenceValue).floor % 60

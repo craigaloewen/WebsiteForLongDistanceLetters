@@ -22,7 +22,7 @@ class LettersController < ApplicationController
 		@unlockTime = @mainUnlockTimeHolder.unlockTime
 
 		if Time.now > @unlockTime
-			@newUnlockTime = @unlockTime + 12.hours #Should be Unlock Time
+			@newUnlockTime = @unlockTime + 48.hours #Should be Unlock Time
 			@mainUnlockTimeHolder.update(unlockTime: @newUnlockTime)
 			@canView = true
 			@letter.isArchived = true
