@@ -35,6 +35,13 @@ class LettersController < ApplicationController
 
 	def show_archived
 		@letter = Letter.find(params[:id])
+
+		if @letter.isArchived
+			@canView = true
+		else 
+			@canView = false
+		end
+
 	end
 
 

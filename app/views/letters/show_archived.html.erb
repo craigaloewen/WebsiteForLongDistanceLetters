@@ -2,7 +2,18 @@
 
 <div class="container-fluid <%= @letter.colour %>-letter-bg">
 
+<% if @canView %>
+
 <%= render 'showLetter' %>
+
+<% else %>
+
+<%= render 'noAccess' %>
+
+<br/><br/>
+I see you being sneaky!! Don't do that!!
+
+<% end %>
 
 <br/> <br/>
 <div class="container">
