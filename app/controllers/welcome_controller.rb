@@ -40,7 +40,7 @@ class WelcomeController < ApplicationController
 	end
 
 	def show_archived
-		@letter = Letter.where(isArchived: true)
+		@letter = Letter.where(isArchived: true).order("updated_at").reverse
 	end
 
 end
