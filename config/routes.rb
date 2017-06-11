@@ -7,6 +7,15 @@ Rails.application.routes.draw do
 
 	match 'show_archived' => 'welcome#show_archived', :as => 'show_archived', :via => :get
 
+	get    '/login',   to: 'sessions#new'
+	post   '/login',   to: 'sessions#create'
+	delete '/logout',  to: 'sessions#destroy'
+
+	get  '/signup',  to: 'users#new'
+  	post '/signup',  to: 'users#create'
+
+	resources :users
+
 	resources :letters do
 		member do
 			get 'unarchive'
@@ -32,5 +41,7 @@ Rails.application.routes.draw do
 		end
 	end
 
-	root 'welcome#index'
+
+
+	root 'welcome#testhomepage'
 end
