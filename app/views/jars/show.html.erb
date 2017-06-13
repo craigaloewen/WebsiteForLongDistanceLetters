@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<% @page = "home" %>
+
+
+<div class="jumbotron">
+  <div class="container">
+    <div class = "row"> 
+    <h1 class="display-3">Letters For Eleanor</h1> 
+    </div>
+    <div class="row">
+    <div class="col col-md-9">
+    <h3>What this is:</h3>
+    <p>Test script.
+    <br/><br/>You can look at one letter every 48 hours. You can currently look at: <b><%= @numberOfLettersAvailable %></b> letters! Your next letter unlocks in: <b><%= @nextUnlockTimeHours %>h:<%= @nextUnlockTimeMinutes %>m:<%= @nextUnlockTimeSeconds %>s</b><br/>
+     </p>
+    </div>
+    <div class="col col-md-3">
+    <img src="/images/LetterJar.png" class="jumbotronImage"></img>
+    </div>
+    </div>
+  </div> 
+</div>
+
+  <%= render 'listAllLetters' %>
+
+</div>

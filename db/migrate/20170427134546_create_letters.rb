@@ -7,6 +7,7 @@ class CreateLetters < ActiveRecord::Migration[5.0]
       t.string :colour
       t.string :from
       t.string :link_token
+      t.references :jar, foreign_key: true
 
       t.timestamps
     end

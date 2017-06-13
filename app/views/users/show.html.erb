@@ -1,1 +1,26 @@
 <h1>User/Show.html</h1>
+
+<h2>Jars</h2>
+<% @user.jars.each do |jar| %>
+  <p>
+    <strong>SiteUrl:</strong>
+    <%= link_to jar.siteurl, user_jar_path(jar)  %>
+  </p>
+
+  <p>
+    <%= link_to 'Destroy Jar', [jar.user, jar],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+    </p>
+<% end %>
+
+<h2>Add a jar:</h2>
+<%= form_for([@user, @user.jars.build]) do |f| %>
+  <p>
+    <%= f.label :siteurl %><br>
+    <%= f.text_field :siteurl %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608014600) do
+ActiveRecord::Schema.define(version: 20170612022612) do
+
+  create_table "jars", force: :cascade do |t|
+    t.string   "siteurl"
+    t.datetime "unlockTime"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_jars_on_user_id"
+  end
 
   create_table "letter_links", force: :cascade do |t|
     t.integer  "numLetters"
     t.string   "token"
+    t.integer  "jar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["jar_id"], name: "index_letter_links_on_jar_id"
   end
 
   create_table "letters", force: :cascade do |t|
@@ -26,8 +37,10 @@ ActiveRecord::Schema.define(version: 20170608014600) do
     t.string   "colour"
     t.string   "from"
     t.string   "link_token"
+    t.integer  "jar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["jar_id"], name: "index_letters_on_jar_id"
   end
 
   create_table "unlock_time_holders", force: :cascade do |t|
