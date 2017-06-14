@@ -13,7 +13,7 @@
         <a class="nav-link<% if @letter_link.numLetters < 1 %> disabled<% end %>" href="<% if @letter_link.numLetters < 1 %>#<% else %><%= new_link_letter_path(@letter_link.token) %><% end %>">Create Letter</a>
       </li>
       <li class="nav-item <% if @page == "sent_letters" %>active<% end %>" >
-        <a class="nav-link" href="<%= sent_letters_path(@letter_link.token) %>">View Letters</a>
+        <a class="nav-link" href="<%= user_jar_letter_link_sent_letters_path(@user,@jar,@letter_link.token) %>">View Letters</a>
       </li>
     </ul>
   </div>

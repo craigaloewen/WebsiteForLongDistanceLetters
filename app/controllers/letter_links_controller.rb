@@ -1,9 +1,9 @@
 class LetterLinksController < ApplicationController
 
-	http_basic_authenticate_with name: "craig", password: "letters", except: [:show, :sent_letters, :error]
-
 	def sent_letters
-		@letter_link = LetterLink.where("token = ?", params[:link_token]).take
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter_link = @jar.letter_links.where("token = ?", params[:letter_link_id]).take
 
 		if @letter_link.nil?
 			redirect_to error_letter_link_path(params[:link_token])
@@ -11,61 +11,72 @@ class LetterLinksController < ApplicationController
 
 
 		@letter = Letter.where("link_token = ?", params[:link_token])
-
-
-
 	end
 
 	def error
-		@letter_link = LetterLink.new
-		@letter_link.token = params[:id]
-		@letter_link.numLetters = 1
+
 	end
 
-
 	def index
-		@letter_link = LetterLink.all
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter_link = @jar.letter_links
 	end
 
 	def show
-		@letter_link = LetterLink.where("token = ?", params[:id]).take
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter_link = @jar.letter_links.where("token = ?", params[:id]).take
 
 		if @letter_link.nil?
-			redirect_to error_letter_link_path(params[:id])
+			redirect_to error_user_jar_letter_link_path(@user,@jar,params[:id])
 		end
 	end
 
 	def new
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
 		@letter_link = LetterLink.new
 	end
 
 	def edit
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
 		@letter_link = LetterLink.find(params[:id])
 	end
 
 	def create
-		@letter_link = LetterLink.new(letter_link_params)
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter_link = @jar.letter_links.new(letter_link_params)
 		@letter_link.token = SecureRandom.hex
-
-		@letter_link.save
-		redirect_to letter_links_path
+		if @letter_link.save
+			flash[:success] = "Letter Link created"
+    	    redirect_to user_jar_letter_links_path(@user,@jar)
+		else
+			render 'new'
+		end
 	end
 
 	def update
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
 		@letter_link = LetterLink.find(params[:id])
 
 		if @letter_link.update(letter_link_params)
-			redirect_to letter_links_path
+			redirect_to user_jar_letter_links_path(@user, @jar)
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
 		@letter_link = LetterLink.find(params[:id])
 		@letter_link.destroy
 
-		redirect_to letter_links_path
+		redirect_to user_jar_letter_links_path(@user, @jar)
 	end
 
 	private

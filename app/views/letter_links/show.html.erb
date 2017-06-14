@@ -47,7 +47,7 @@
 	</div>
 	<div class="col">
 	<h3> See the letters created by this link </h3> <br/>
-	<button type="button" class="btn btn-primary" onclick="window.location='<%= sent_letters_path(@letter_link.token) %>'">View Letters</button>
+	<button type="button" class="btn btn-primary" onclick="window.location='<%= user_jar_letter_link_sent_letters_path(@user,@jar,@letter_link.token) %>'">View Letters</button>
 	</div>
 	</div>
 	

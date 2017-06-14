@@ -1,8 +1,5 @@
 class WelcomeController < ApplicationController
 
-
-	http_basic_authenticate_with name: "eleanor", password: "present"
-
 	def index
 		unlockTimeHolder = UnlockTimeHolder.first
 

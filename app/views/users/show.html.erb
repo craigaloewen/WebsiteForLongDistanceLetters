@@ -2,16 +2,16 @@
 
 <h2>Jars</h2>
 <% @user.jars.each do |jar| %>
-  <p>
-    <strong>SiteUrl:</strong>
-    <%= link_to jar.siteurl, user_jar_path(jar)  %>
-  </p>
+<p>
+  <strong>SiteUrl:</strong>
+  <%= link_to jar.siteurl, user_jar_path(@user,jar)  %>
 
-  <p>
-    <%= link_to 'Destroy Jar', [jar.user, jar],
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
-    </p>
+  <%= link_to 'Letter Links', user_jar_letter_links_path(@user,jar) %>
+
+  <%= link_to 'Destroy Jar', [jar.user, jar],
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</p>
 <% end %>
 
 <h2>Add a jar:</h2>
