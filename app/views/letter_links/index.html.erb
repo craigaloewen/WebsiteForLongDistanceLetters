@@ -17,7 +17,7 @@
   <% @letter_link.each do |letter_link| %>
     <div class="row">
       <div class="col"><%= link_to letter_link.token, user_jar_letter_link_path(@user,@jar,letter_link.token) %></a></div>
-      <div class="col"><%= letter_link.numLetters %></div>
+      <div class="col"><%= letter_link.letters_number %></div>
       <div class="col"><%= letter_link.created_at %></div>
       <div class="col"><%= link_to 'Edit', edit_user_jar_letter_link_path(@user, @jar, letter_link) %></div>
       <div class="col"><%= link_to 'Destroy', user_jar_letter_link_path(@user, @jar, letter_link),

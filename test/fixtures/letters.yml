@@ -3,7 +3,7 @@
 one:
   title: MyString
   text: MyText
-  isArchived: false
+  is_archived: false
   colour: MyString
   from: MyString
   link_token: MyString
@@ -11,7 +11,7 @@ one:
 two:
   title: MyString
   text: MyText
-  isArchived: false
+  is_archived: false
   colour: MyString
   from: MyString
   link_token: MyString

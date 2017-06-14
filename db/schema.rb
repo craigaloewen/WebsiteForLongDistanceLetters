@@ -13,40 +13,35 @@
 ActiveRecord::Schema.define(version: 20170612022612) do
 
   create_table "jars", force: :cascade do |t|
-    t.string   "siteurl"
-    t.datetime "unlockTime"
+    t.string   "site_url"
+    t.datetime "unlock_time"
+    t.integer  "refresh_rate"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["user_id"], name: "index_jars_on_user_id"
   end
 
   create_table "letter_links", force: :cascade do |t|
-    t.integer  "numLetters"
+    t.integer  "letters_number"
     t.string   "token"
     t.integer  "jar_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["jar_id"], name: "index_letter_links_on_jar_id"
   end
 
   create_table "letters", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
-    t.boolean  "isArchived"
+    t.boolean  "is_archived"
     t.string   "colour"
     t.string   "from"
     t.string   "link_token"
     t.integer  "jar_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["jar_id"], name: "index_letters_on_jar_id"
-  end
-
-  create_table "unlock_time_holders", force: :cascade do |t|
-    t.datetime "unlockTime"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

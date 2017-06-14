@@ -1,31 +1,21 @@
 class LettersController < ApplicationController
 
-
-	http_basic_authenticate_with name: "craig", password: "letters", except: [:show, :show_archived, :new_link_letter, :create_link_letter]
-	http_basic_authenticate_with name: "eleanor", password: "present", only: [:show, :show_archived]
-
 	def index
-		@letter = Letter.all
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter = @jar.letters
 	end
 
 	def show
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter = @jar.letters.find(params[:id])
 
-		@letter = Letter.find(params[:id])
 
-		@mainUnlockTimeHolder = UnlockTimeHolder.first
-
-		if @mainUnlockTimeHolder.nil?
-			@mainUnlockTimeHolder = UnlockTimeHolder.new(unlockTime: Time.now)
-			@mainUnlockTimeHolder.save
-		end
-
-		@unlockTime = @mainUnlockTimeHolder.unlockTime
-
-		if Time.now > @unlockTime
-			@newUnlockTime = @unlockTime + 48.hours #Should be Unlock Time
-			@mainUnlockTimeHolder.update(unlockTime: @newUnlockTime)
+		
+		if Time.now > @jar.unlock_time
 			@canView = true
-			@letter.isArchived = true
+			@letter.is_archived = true
 			@letter.save
 		else
 			@canView = false
@@ -36,7 +26,7 @@ class LettersController < ApplicationController
 	def show_archived
 		@letter = Letter.find(params[:id])
 
-		if @letter.isArchived
+		if @letter.is_archived
 			@canView = true
 		else 
 			@canView = false
@@ -46,7 +36,9 @@ class LettersController < ApplicationController
 
 
 	def new
-		@letter = Letter.new
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter = @jar.letters.new
 	end
 
 	def edit
@@ -55,12 +47,18 @@ class LettersController < ApplicationController
 
 	
 	def create
-		@letter = Letter.new(letter_params)
-		@letter.isArchived = false
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter = @jar.letters.new(letter_params)
+		@letter.is_archived = false
 		@letter.link_token = "admin-created"
-
-		@letter.save
-		redirect_to letters_path
+		
+		if @letter.save
+			flash[:success] = "Letter created"
+			redirect_to user_jar_letters_path(@user,@jar)
+		else
+			render 'new'
+		end
 	end
 
 	def new_link_letter
@@ -81,11 +79,11 @@ class LettersController < ApplicationController
 		end
 
 
-		@letter_link.numLetters = @letter_link.numLetters - 1
+		@letter_link.letters_number = @letter_link.letters_number - 1
 		@letter_link.save
 
 		@letter = Letter.new(letter_params)
-		@letter.isArchived = false
+		@letter.is_archived = false
 		@letter.link_token = @letter_link.token
 		@letter.save
 
@@ -106,24 +104,26 @@ class LettersController < ApplicationController
 
 	def unarchive
 		@letter = Letter.find(params[:id])
-		@letter.isArchived = false
+		@letter.is_archived = false
 		@letter.save
 		redirect_to letters_path
 	end
 
 	def archive
 		@letter = Letter.find(params[:id])
-		@letter.isArchived = true
+		@letter.is_archived = true
 		@letter.save
 		redirect_to letters_path
 	end
 
 
 	def destroy
-		@letter = Letter.find(params[:id])
+		@user = User.find(params[:user_id])
+		@jar = Jar.find(params[:jar_id])
+		@letter = @jar.letters.find(params[:id])
 		@letter.destroy
 
-		redirect_to letters_path
+		redirect_to user_jar_letters_path(@user,@jar)
 	end
 
 	private

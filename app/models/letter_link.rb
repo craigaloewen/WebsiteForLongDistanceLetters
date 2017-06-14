@@ -1,6 +1,6 @@
 class LetterLink < ApplicationRecord
 
-    validates :numLetters, presence: true
+    validates :letters_number, presence: true
 
     belongs_to :jar
 end

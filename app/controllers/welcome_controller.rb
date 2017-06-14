@@ -1,31 +1,31 @@
 class WelcomeController < ApplicationController
 
 	def index
-		unlockTimeHolder = UnlockTimeHolder.first
+		unlock_timeHolder = unlock_timeHolder.first
 
-		if unlockTimeHolder.nil?
-			unlockTimeHolder = UnlockTimeHolder.new(unlockTime: Time.now)
-			unlockTimeHolder.save
+		if unlock_timeHolder.nil?
+			unlock_timeHolder = unlock_timeHolder.new(unlock_time: Time.now)
+			unlock_timeHolder.save
 		end
 
-		unlockTime = unlockTimeHolder.unlockTime
-		timeDifference = ((Time.now - unlockTime))
+		unlock_time = unlock_timeHolder.unlock_time
+		timeDifference = ((Time.now - unlock_time))
 
 		if timeDifference < 0
 			@numberOfLettersAvailable = 0
-			unlockTimeDifferenceValue = -timeDifference
+			unlock_timeDifferenceValue = -timeDifference
 		else 
 			@numberOfLettersAvailable = (timeDifference/172800).ceil
-			unlockTimeDifferenceValue = 172800-(timeDifference % 172800)
+			unlock_timeDifferenceValue = 172800-(timeDifference % 172800)
 		end
 
-		@nextUnlockTimeSeconds = (unlockTimeDifferenceValue).floor % 60
-		@nextUnlockTimeMinutes = ((unlockTimeDifferenceValue)/60).floor % 60
-		@nextUnlockTimeHours = ((unlockTimeDifferenceValue)/3600).floor
+		@nextunlock_timeSeconds = (unlock_timeDifferenceValue).floor % 60
+		@nextunlock_timeMinutes = ((unlock_timeDifferenceValue)/60).floor % 60
+		@nextunlock_timeHours = ((unlock_timeDifferenceValue)/3600).floor
 
 		@canView
 
-		if Time.now > unlockTime 
+		if Time.now > unlock_time 
 			@canView = true
 		else 
 			@canView = false
@@ -33,7 +33,7 @@ class WelcomeController < ApplicationController
 
 
 
-		@letter = Letter.where(isArchived: false)
+		@letter = Letter.where(is_archived: false)
 	end
 
 	def testhomepage
@@ -41,7 +41,7 @@ class WelcomeController < ApplicationController
 	end
 
 	def show_archived
-		@letter = Letter.where(isArchived: true).order("updated_at").reverse
+		@letter = Letter.where(is_archived: true).order("updated_at").reverse
 	end
 
 end

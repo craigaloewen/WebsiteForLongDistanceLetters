@@ -9,8 +9,16 @@ class JarsController < ApplicationController
 
     def create
         @user = User.find(params[:user_id])
-        @jar = @user.jars.create(jar_params)
-        redirect_to user_path(@user)
+        @jar = @user.jars.new(jar_params)
+		@jar.unlock_time = Time.now
+
+		if @jar.save
+			flash[:success] = "Jar created"
+    	    redirect_to user_path(@user)
+		else
+            flash[:success] = "Jar not created"
+			redirect_to user_path(@user)
+		end
     end
 
     def destroy
@@ -22,7 +30,7 @@ class JarsController < ApplicationController
  
     private
     def jar_params
-      params.require(:jar).permit(:siteurl)
+      params.require(:jar).permit(:site_url, :refresh_rate)
     end
 
 

@@ -3,7 +3,7 @@ class CreateLetters < ActiveRecord::Migration[5.0]
     create_table :letters do |t|
       t.string :title
       t.text :text
-      t.boolean :isArchived
+      t.boolean :is_archived
       t.string :colour
       t.string :from
       t.string :link_token

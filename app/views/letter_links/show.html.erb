@@ -37,8 +37,8 @@
 
 	</div>
 	<div class="col">
-	<h3>This link has <b><%= @letter_link.numLetters %></b> letters left</h3><br/>
-	<% if @letter_link.numLetters > 0 %> 
+	<h3>This link has <b><%= @letter_link.letters_number %></b> letters left</h3><br/>
+	<% if @letter_link.letters_number > 0 %> 
 	<button type="button" class="btn btn-primary" onclick="window.location='<%= new_link_letter_path(@letter_link.token) %>'">Create Letter</button>
 	<% else %>
 	Thanks for writing all of the letters!

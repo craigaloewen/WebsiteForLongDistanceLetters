@@ -1,7 +1,0 @@
-<h1>Unlock Time Holders </h1>
-
-<% @unlock_time_holder.each do |unlock_time_holder| %>
-
-	Date: <%= unlock_time_holder.unlockTime %> : <%= link_to 'Remove Letter', remove_letter_unlock_time_holder_path(unlock_time_holder) %>  : <%= link_to 'Set Now', set_now_unlock_time_holder_path(unlock_time_holder) %> : <%= link_to 'Add Letter', add_letter_unlock_time_holder_path(unlock_time_holder) %>    <br/>
-
-<% end %>

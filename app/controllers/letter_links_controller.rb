@@ -81,6 +81,6 @@ class LetterLinksController < ApplicationController
 
 	private
 	def letter_link_params
-		params.require(:letter_link).permit(:numLetters)
+		params.require(:letter_link).permit(:letters_number)
 	end
 end
