@@ -10,7 +10,11 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <% if @letter_link.nil? %>
+      <%= render 'layouts/header' %>
+    <% else %>
+      <%= render 'layouts/letter_link_header' %>
+    <% end %>
     <div class="container">
       <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %>"><%= message %></div>

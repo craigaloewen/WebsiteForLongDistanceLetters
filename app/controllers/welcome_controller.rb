@@ -37,7 +37,9 @@ class WelcomeController < ApplicationController
 	end
 
 	def testhomepage
-
+		if logged_in?
+			redirect_to current_user
+		end
 	end
 
 	def show_archived

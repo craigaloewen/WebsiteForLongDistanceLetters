@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 			resources :letter_links do
 				get 'sent_letters', to: 'letter_links#sent_letters'
 				member do
-					get 'newLetter'
+					get 'new_letter'
 					get 'error'
 				end
 			end

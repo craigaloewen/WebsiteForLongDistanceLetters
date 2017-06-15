@@ -10,7 +10,7 @@ class LetterLinksController < ApplicationController
 		end
 
 
-		@letter = Letter.where("link_token = ?", params[:link_token])
+		@letter = @jar.letters.where("link_token = ?", params[:link_token])
 	end
 
 	def error
