@@ -10,10 +10,12 @@
   </head>
 
   <body>
-    <% if @letter_link.nil? %>
-      <%= render 'layouts/header' %>
-    <% else %>
-      <%= render 'layouts/letter_link_header' %>
+    <% if valid_letter_link? %>
+      <%= render 'layouts/navbar_letter_link' %>
+    <% elsif logged_in?  %>
+      <%= render 'layouts/navbar_logged_in' %>
+    <% else  %>
+      <%= render 'layouts/navbar_default' %>
     <% end %>
     <div class="container">
       <% flash.each do |message_type, message| %>

@@ -20,7 +20,7 @@ class LetterLinksController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
 		@jar = Jar.find(params[:jar_id])
-		@letter_link = @jar.letter_links
+		@letter_links = @jar.letter_links
 	end
 
 	def show

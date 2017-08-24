@@ -1,0 +1,24 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+<div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="<%= root_path %>">Letter Jar</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="nav navbar-nav navbar-center">
+      <% if logged_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <%= link_to "Profile", current_user, class: "dropdown-item"  %>
+            <%= link_to "Settings", '#', class: "dropdown-item"  %>
+            <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete  %>
+          </div>
+        </li>
+      <% else %>
+        <li><%= link_to "Log in", login_path, class: "nav-link" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+</nav>
