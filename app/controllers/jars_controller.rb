@@ -1,31 +1,35 @@
 class JarsController < ApplicationController
 
-    def show
-        @user = User.find_by(username: params[:user_username])
-        @jar = @user.jars.find_by(site_url: params[:site_url])
-        @letter = @jar.letters
+    def admin
+        @jar = Jar.find_by(site_url: params[:site_url])
     end
 
+    def show
+        @jar = Jar.find_by(site_url: params[:site_url])
+        @letter = @jar.letters.all
+    end
+
+    def new
+        @jar = Jar.new
+    end
 
     def create
-        @user = User.find_by(username: params[:user_username])
-        @jar = @user.jars.new(jar_params)
-		@jar.unlock_time = Time.now
+        @jar = Jar.new(jar_params)
+        @jar.unlock_time = Time.now
 
 		if @jar.save
-			flash[:success] = "Jar created"
-    	    redirect_to user_path(@user)
+			flash[:success] = 'Jar created'
+    	    redirect_to admin_jar_path(@jar)
 		else
-            flash[:success] = "Jar not created"
-			redirect_to user_path(@user)
+            flash[:warning] = 'Jar not created'
+            render 'new'
 		end
     end
 
     def destroy
-        @user = User.find_by(username: params[:user_username])
-        @jar = @user.jars.find_by(site_url: params[:site_url])
+        @jar = Jar.find_by(site_url: params[:site_url])
         @jar.destroy
-        redirect_to user_path(@user)
+        redirect_to root_path
     end
  
     private
@@ -33,5 +37,8 @@ class JarsController < ApplicationController
       params.require(:jar).permit(:site_url, :refresh_rate)
     end
 
+    def to_param
+		site_url
+    end
 
 end

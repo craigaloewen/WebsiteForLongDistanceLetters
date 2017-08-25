@@ -36,10 +36,8 @@ class WelcomeController < ApplicationController
 		@letter = Letter.where(is_archived: false)
 	end
 
-	def testhomepage
-		if logged_in?
-			redirect_to user_path(current_user.username)
-		end
+	def start_page
+
 	end
 
 	def show_archived

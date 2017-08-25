@@ -4,9 +4,9 @@ class CreateJars < ActiveRecord::Migration[5.0]
       t.string :site_url
       t.datetime :unlock_time
       t.integer :refresh_rate
-      t.references :user, foreign_key: true
 
       t.timestamps
     end
+    add_index :jars, :site_url, unique: true
   end
 end

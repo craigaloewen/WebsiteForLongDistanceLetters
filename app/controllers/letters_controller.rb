@@ -1,8 +1,7 @@
 class LettersController < ApplicationController
 
 	def index
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter = @jar.letters
 	end
 
@@ -36,8 +35,7 @@ class LettersController < ApplicationController
 
 
 	def new
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter = @jar.letters.new
 	end
 

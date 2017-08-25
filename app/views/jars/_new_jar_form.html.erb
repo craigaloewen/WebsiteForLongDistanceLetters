@@ -1,0 +1,31 @@
+<%= form_for @jar do |f|  %>
+
+  <% if @jar.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@jar.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @jar.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :site_url %><br>
+    <%= f.text_field :site_url %>
+  </p>
+ 
+  <p>
+    <%= f.label :refresh_rate %><br>
+    <%= f.text_field :refresh_rate %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
