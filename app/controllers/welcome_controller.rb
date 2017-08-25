@@ -38,7 +38,7 @@ class WelcomeController < ApplicationController
 
 	def testhomepage
 		if logged_in?
-			redirect_to current_user
+			redirect_to user_path(current_user.username)
 		end
 	end
 

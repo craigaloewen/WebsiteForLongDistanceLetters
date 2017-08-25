@@ -1,8 +1,8 @@
 class LetterLinksController < ApplicationController
 
 	def sent_letters
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = @jar.letter_links.where("token = ?", params[:letter_link_id]).take
 
 		if @letter_link.nil?
@@ -18,14 +18,14 @@ class LetterLinksController < ApplicationController
 	end
 
 	def index
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_links = @jar.letter_links
 	end
 
 	def show
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = @jar.letter_links.where("token = ?", params[:id]).take
 
 		if @letter_link.nil?
@@ -34,20 +34,20 @@ class LetterLinksController < ApplicationController
 	end
 
 	def new
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = LetterLink.new
 	end
 
 	def edit
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = LetterLink.find(params[:id])
 	end
 
 	def create
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = @jar.letter_links.new(letter_link_params)
 		@letter_link.token = SecureRandom.hex
 		if @letter_link.save
@@ -59,8 +59,8 @@ class LetterLinksController < ApplicationController
 	end
 
 	def update
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = LetterLink.find(params[:id])
 
 		if @letter_link.update(letter_link_params)
@@ -71,8 +71,8 @@ class LetterLinksController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:user_id])
-		@jar = Jar.find(params[:jar_id])
+		@user = User.find_by(username: params[:user_username])
+		@jar = Jar.find_by(site_url: params[:jar_site_url])
 		@letter_link = LetterLink.find(params[:id])
 		@letter_link.destroy
 

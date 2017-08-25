@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-	match 'letters/new_link_letter/:link_token' => 'letters#new_link_letter', :as => 'new_link_letter', :via => :get
-	match 'letters/create_link_letter/:link_token' => 'letters#create_link_letter', :as => 'create_link_letter', :via => :post
-
-
-	match 'show_archived' => 'welcome#show_archived', :as => 'show_archived', :via => :get
-
 	get    '/login',   to: 'sessions#new'
 	post   '/login',   to: 'sessions#create'
 	delete '/logout',  to: 'sessions#destroy'
@@ -13,8 +7,8 @@ Rails.application.routes.draw do
 	get  '/signup',  to: 'users#new'
   	post '/signup',  to: 'users#create'
 
-	resources :users do
-		resources :jars do
+	resources :users, param: :username do
+		resources :jars, param: :site_url do
 			resources :letter_links do
 				get 'sent_letters', to: 'letter_links#sent_letters'
 				member do
