@@ -23,6 +23,26 @@
     <%= f.label :refresh_rate %><br>
     <%= f.text_field :refresh_rate %>
   </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= f.label :is_secured %><br>
+    <%= f.check_box :is_secured %>
+  </p>
+
+  <p>
+    <%= f.label :encrypted_jar_password %><br>
+    <%= f.password_field :jar_password %>
+  </p>
  
   <p>
     <%= f.submit %>

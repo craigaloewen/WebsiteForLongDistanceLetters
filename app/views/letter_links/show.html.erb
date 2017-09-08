@@ -1,16 +1,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<% @page = "home" %>
-
 <div class="jumbotron">
 	<div class="container">
 		<div class = "row"> 
-		<h1 class="display-3">Letters For Eleanor</h1> 
+		<h1 class="display-3">Letters For YOUR SO</h1> 
 		</div>
 		<div class="row">
 		<div class="col col-md-9">
 		<h3>What this is:</h3>
-		<p>This is a gift created by me (Craig) for when I leave to Seattle. The general idea is to have a jar filled with letters with personal messages written to her. She would only be able to open one letter a day. I wanted to add in some letters from her friends, and so I built this website to help do it! She will have a portion of the site where she can view all the letters that everyone writes. Thanks for helping me surprise Eleanor!<br/>
+		<p>This is a gift created by me (Craig) for when I leave to Seattle. The general idea is to have a jar filled with letters with personal messages written to her. She would only be able to open one letter a day. I wanted to add in some letters from her friends, and so I built this website to help do it! She will have a portion of the site where she can view all the letters that everyone writes. Thanks for helping me surprise YOUR SO!<br/>
 
 		 </p>
 		</div>
@@ -20,10 +18,6 @@
 		</div>
 	</div> 
 </div>
-
-
-
-
 
 <div class="container" style="padding-bottom: 40px">
 	<div class="row"> 
@@ -38,7 +32,7 @@
 	<div class="col">
 	<h3>This link has <b><%= @letter_link.letters_number %></b> letters left</h3><br/>
 	<% if @letter_link.letters_number > 0 %> 
-	<button type="button" class="btn btn-primary" onclick="window.location='<%= new_link_letter_path(@letter_link.token) %>'">Create Letter</button>
+	<button type="button" class="btn btn-primary" onclick="window.location='<%= letter_link_new_letter_path(@letter_link) %>'">Create Letter</button>
 	<% else %>
 	Thanks for writing all of the letters!
 	<% end %>
@@ -46,7 +40,7 @@
 	</div>
 	<div class="col">
 	<h3> See the letters created by this link </h3> <br/>
-	<button type="button" class="btn btn-primary" onclick="window.location='<%= user_jar_letter_link_sent_letters_path(@user,@jar,@letter_link.token) %>'">View Letters</button>
+	<button type="button" class="btn btn-primary" onclick="window.location='<%= letter_link_sent_letters_path(@letter_link) %>'">View Letters</button>
 	</div>
 	</div>
 	

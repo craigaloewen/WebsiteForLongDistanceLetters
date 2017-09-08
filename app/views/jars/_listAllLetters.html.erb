@@ -6,7 +6,7 @@
 		<div class="col col-md-4 ">
 		<div class="pull-down">
 		<p class="letter-title-text"><%= letter.title %></p>
-			<a href ="<% if letter.is_archived %><%= show_archived_user_jar_letter_path(@user,@jar,letter) %><% else %><%= user_jar_letter_path(@user,@jar,letter) %><% end %>">
+			<a href ="<% if letter.is_archived %><%= show_archived_jar_letter_path(@jar,letter) %><% else %><%= jar_letter_path(@jar,letter) %><% end %>">
 			<div class="envelope-<%= letter.colour %>">
 			<div class="paper"></div>
 			</div>

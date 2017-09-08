@@ -81,9 +81,7 @@ top: -36px;
 }
 
 @mixin create-color-background($color) {
-background-color: $color;
-min-height: 100vh;
-min-width: 100vw;
+	background-color: $color;
 }
 
 .red-letter-bg { @include create-color-background(const('RED_ENV_DARK')); }

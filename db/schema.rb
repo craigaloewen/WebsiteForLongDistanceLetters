@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 20170612022612) do
     t.string   "site_url"
     t.datetime "unlock_time"
     t.integer  "refresh_rate"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "password_digest"
+    t.boolean  "is_secured"
+    t.string   "encrypted_jar_password"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["site_url"], name: "index_jars_on_site_url", unique: true
   end
 
@@ -28,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170612022612) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["jar_id"], name: "index_letter_links_on_jar_id"
+    t.index ["token"], name: "index_letter_links_on_token", unique: true
   end
 
   create_table "letters", force: :cascade do |t|

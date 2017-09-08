@@ -8,7 +8,7 @@ module JarsHelper
             @nextUnlockTimeHours = 0
         else
             unlock_time = jar.unlock_time
-            unlock_rate = jar.refresh_rate * 86400
+            unlock_rate = jar.refresh_rate
             timeDifference = ((Time.now - unlock_time))
 
             if timeDifference < 0
@@ -22,6 +22,22 @@ module JarsHelper
             @nextUnlockTimeSeconds = (unlockTimeDifferenceValue).floor % 60
             @nextUnlockTimeMinutes = ((unlockTimeDifferenceValue)/60).floor % 60
             @nextUnlockTimeHours = ((unlockTimeDifferenceValue)/3600).floor
+        end
+    end
+
+    def add_letter_count_helper(jar)
+        if (!jar.nil? && !jar.unlock_time.nil? && !jar.refresh_rate.nil?)
+            if !jar.update_attribute(:unlock_time, (jar.unlock_time - jar.refresh_rate) )
+                flash[:warning] = 'Letter count not added'
+            end
+        end
+    end
+
+    def remove_letter_count_helper(jar)
+        if (!jar.nil? && !jar.unlock_time.nil? && !jar.refresh_rate.nil?)
+            if !jar.update_attribute(:unlock_time, (jar.unlock_time + jar.refresh_rate) )
+                flash[:warning] = 'Letter count not removed'
+            end
         end
     end
 

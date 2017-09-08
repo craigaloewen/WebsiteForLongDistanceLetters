@@ -1,4 +1,8 @@
-<h2>Control your Jar</h2>
+<h1>Control your Jar</h1>
+
+<% get_letter_unlock_info(@jar) %>
+
+<%= link_to 'View Jar', jar_path(@jar) %> | Number of Letters: <%= @numberOfLettersAvailable %> | <%= link_to 'Add Letter', add_letter_count_jar_path(@jar) %> | <%= link_to 'Remove Letter', remove_letter_count_jar_path(@jar) %> <br/>
 
 <%= link_to 'Letter Links', jar_letter_links_path(@jar) %> <br/>
 

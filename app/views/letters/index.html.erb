@@ -1,7 +1,7 @@
 
 <h1>Listing Letters</h1>
  
- <%= link_to 'Admin Page', jar_path(@jar) %><br/>
+ <%= link_to 'Admin Page', admin_jar_path(@jar) %><br/>
  <%= link_to 'New Letter', new_jar_letter_path(@jar) %><br/>
 
 <div class="container">
@@ -31,9 +31,9 @@
       <div class="col"><%= letter.is_archived %></div>
       <div class="col"><%= letter.colour %></div>
       <div class="col"><%= letter.link_token %></div>
-      <div class="col"><%= link_to 'Edit', edit_user_jar_letter_path(@user,@jar,letter) %></div>
-      <div class="col"><% if letter.is_archived %><%= link_to 'Unarchive', unarchive_user_jar_letter_path(@user,@jar,letter) %><% else %><%= link_to 'Archive', archive_user_jar_letter_path(@user,@jar,letter) %><% end %></div>
-      <div class="col"><%= link_to 'Destroy', user_jar_letter_path(@user,@jar,letter),
+      <div class="col"><%= link_to 'Edit', edit_jar_letter_path(@jar,letter) %></div>
+      <div class="col"><% if letter.is_archived %><%= link_to 'Unarchive', unarchive_jar_letter_path(@jar,letter) %><% else %><%= link_to 'Archive', archive_jar_letter_path(@jar,letter) %><% end %></div>
+      <div class="col"><%= link_to 'Destroy', jar_letter_path(@jar,letter),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></div>
               </div> <br/>

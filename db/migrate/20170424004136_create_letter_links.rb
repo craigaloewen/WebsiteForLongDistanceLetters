@@ -7,5 +7,6 @@ class CreateLetterLinks < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :letter_links, :token, unique: true
   end
 end

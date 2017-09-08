@@ -1,8 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<% @page = "home" %>
-<% get_letter_unlock_info(@jar) %>
-
 <div class="jumbotron">
   <div class="container">
     <div class = "row"> 
@@ -10,10 +7,8 @@
     </div>
     <div class="row">
     <div class="col col-md-9">
-    <h3>What this is:</h3>
-    <p>Test script.
-    <br/><br/>You can look at one letter every 48 hours. You can currently look at: <b><%= @numberOfLettersAvailable %></b> letters! Your next letter unlocks in: <b><%= @nextUnlockTimeHours %>h:<%= @nextUnlockTimeMinutes %>m:<%= @nextUnlockTimeSeconds %>s</b><br/>
-     </p>
+    <h3>Your Archived Letters</h3>
+    <p>Take a look back at letters you've seen before anytime you'd like.</p>
     </div>
     <div class="col col-md-3">
     <img src="/images/LetterJar.png" class="jumbotronImage"></img>
@@ -21,7 +16,7 @@
     </div>
   </div> 
 </div>
-
+  
   <%= render 'listAllLetters' %>
 
 </div>
