@@ -5,20 +5,20 @@
  <%= link_to 'New Letter', new_jar_letter_path(@jar) %><br/>
 
 <div class="container">
-<div class="row black-border">
-<div class="col-1">From</div>
-<div class="col-2">Title</div>
-<div class="col-8">Text</div>
-<div class="col-1">Date</div>
-</div><div class="row black-border">
-<div class="col">is_archived</div>
-<div class="col">Colour</div>
-<div class="col">Token</div>
-<div class="col">Edit</div>
-<div class="col">Unarchive</div>
-<div class="col">Destroy</div>
-</div>
-<br/>
+  <div class="row black-border">
+    <div class="col-1">From</div>
+    <div class="col-2">Title</div>
+    <div class="col-8">Text</div>
+    <div class="col-1">Date</div>
+  </div>
+  <div class="row black-border">
+    <div class="col">is_archived</div>
+    <div class="col">Colour</div>
+    <div class="col">Token</div>
+    <div class="col">Unarchive</div>
+    <div class="col">Destroy</div>
+  </div>
+  <br/>
 
  
   <% @letter.each do |letter| %>
@@ -31,7 +31,6 @@
       <div class="col"><%= letter.is_archived %></div>
       <div class="col"><%= letter.colour %></div>
       <div class="col"><%= letter.link_token %></div>
-      <div class="col"><%= link_to 'Edit', edit_jar_letter_path(@jar,letter) %></div>
       <div class="col"><% if letter.is_archived %><%= link_to 'Unarchive', unarchive_jar_letter_path(@jar,letter) %><% else %><%= link_to 'Archive', archive_jar_letter_path(@jar,letter) %><% end %></div>
       <div class="col"><%= link_to 'Destroy', jar_letter_path(@jar,letter),
               method: :delete,
