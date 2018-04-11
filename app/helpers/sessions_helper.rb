@@ -15,8 +15,10 @@ module SessionsHelper
     end
 
     def check_jar_access(jar)
-        if !logged_in?
-            redirect_to jar_login_path(jar)
+        if jar.is_secured
+            if !logged_in?
+                redirect_to jar_login_path(jar)
+            end
         end
     end
 

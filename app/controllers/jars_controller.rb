@@ -39,10 +39,10 @@ class JarsController < ApplicationController
 
     def create
         @jar = Jar.new(jar_params)
-        @jar.refresh_rate = @jar.refresh_rate * 86400
+        @jar.refresh_rate = @jar.refresh_rate
         @jar.unlock_time = Time.now
 
-        current_jar
+        admin_log_in(@jar)
 
 		if @jar.save
             flash[:success] = 'Jar created'
